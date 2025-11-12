@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:football_shop/screens/newslist_form.dart'; // Import halaman form tambah produk
+import 'package:football_shop/widget/left_drawer.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -7,13 +9,12 @@ class MyHomePage extends StatelessWidget {
   final String npm = "2406439715";
   final String kelas = "A";
 
-  // ===================== ADD BARU =====================
+  // Menambahkan item baru untuk navigasi
   final List<ItemHomepage> items = [
     ItemHomepage("All Products", Icons.list, Colors.blue),
     ItemHomepage("My Products", Icons.person, Colors.green),
-    ItemHomepage("Create Product", Icons.add, Colors.red),
+    ItemHomepage("Create Product", Icons.add, Colors.red), // Button untuk pergi ke form tambah produk
   ];
-  // ===================== ADD BARU =====================
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,7 @@ class MyHomePage extends StatelessWidget {
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
+      drawer: LeftDrawer(), // Menambahkan Drawer pada halaman
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -76,6 +78,58 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
+// Widget ItemCard untuk tiap item menu yang akan ditap
+class ItemCard extends StatelessWidget {
+  final ItemHomepage item;
+
+  const ItemCard(this.item, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: item.color,
+      borderRadius: BorderRadius.circular(12),
+      child: InkWell(
+        onTap: () {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}")),
+            );
+          if (item.name == "Create Product") {
+            // Navigasi ke halaman form tambah produk
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const NewsFormPage()),
+            );
+          }
+        },
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  item.icon,
+                  color: Colors.white,
+                  size: 30.0,
+                ),
+                const Padding(padding: EdgeInsets.all(3)),
+                Text(
+                  item.name,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class InfoCard extends StatelessWidget {
   final String title;
   final String content;
@@ -104,56 +158,11 @@ class InfoCard extends StatelessWidget {
   }
 }
 
-// ===================== ADD BARU =====================
+// ItemHomepage class untuk item menu
 class ItemHomepage {
   final String name;
   final IconData icon;
   final Color color;
 
   ItemHomepage(this.name, this.icon, this.color);
-}
-// ===================== ADD BARU =====================
-
-class ItemCard extends StatelessWidget {
-  final ItemHomepage item;
-
-  const ItemCard(this.item, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: item.color,
-      borderRadius: BorderRadius.circular(12),
-      child: InkWell(
-        onTap: () {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}")),
-            );
-        },
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }

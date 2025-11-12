@@ -56,3 +56,34 @@ Jelaskan konsep "hot reload" di Flutter dan bagaimana bedanya dengan "hot restar
 Hot reload adalah fitur Flutter yang menambahkan perubahan kode Dart ke aplikasi yang sedang berjalan lalu melakukan rebuild widget tree tanpa mengulang seluruh aplikasi, sehingga state yang sudah ada (misalnya halaman yang sedang dibuka atau nilai variabel di State) tetap dipertahankan. Ini bagus buat peruubahan UI kecil seperti mengubah teks, warna, padding, atau menambah widget di layout. 
 
 Hot restart berbeda adaalh ketika Flutter akan menjalankan ulang aplikasi dari main(), membuang seluruh state, dan membangun ulang widget tree dari awal
+
+================================================== TUGAS 8 ===========================================================================
+NOMOR 1
+Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement() pada Flutter. Dalam kasus apa sebaiknya masing-masing digunakan pada aplikasi Football Shop kamu?
+Jadi sistem page pada flutter itu pake sistem stack, makannya ada push dan pushreplacement. Bedanya apa? Kalau pake push itu bakal nambahin page tersebut ke tumpukkan stack dan bisa back, jadi misal di footballshop itu kayak form buat input productnya, meskipun pagenya udah ditambah ke stack dan  kita udah pindah halaman lah intinya dia masih bisa balik ke awal. Sedangkan pushreplacement itu lebih kearah dia bakal ngegantiin current stack, dia dipake di drawer karena drawer itu lebih ke inisiasi pindah page bukan sementara doang.
+
+NOMOR 2
+Bagaimana kamu memanfaatkan hierarchy widget seperti Scaffold, AppBar, dan Drawer untuk membangun struktur halaman yang konsisten di seluruh aplikasi?
+Scaffold itu kerangka dasar halaman. Biar semua halaman YANG DIBUAT itu bentuknya konsisten 
+AppBar bakal dipake di semua halaman supaya user tahu mereka masih di aplikasi yang sama
+Drawer ditempel ke Scaffold yang butuh navigasi global
+jadi kodenya kek gini 
+return Scaffold(
+  appBar: AppBar(
+    title: const Text('Football Shop'),
+  ),
+  drawer: const LeftDrawer(), // ini Drawer sama di semua halaman
+  body: ... // ini bisaa diisi halaman yang beda beda
+);
+Karena Scaffold-nya konsisten, jadi gak perlu bikin ulang drawer di setiap tempat—cukup panggil widget drawer yang sama aja
+
+NOMOR 3
+Dalam konteks desain antarmuka, apa kelebihan menggunakan layout widget seperti Padding, SingleChildScrollView, dan ListView saat menampilkan elemen-elemen form? Berikan contoh penggunaannya dari aplikasi kamu.
+
+padding itu buat memposisikan formnya gimana biar gak nempel diujung ujung banget jadi dikasih padding biar bisa ketengahan applied to all form ini
+singlechilscrollview itu penting banget buat form panjang, jadi kalau keyboard muncul atau layar kecil, form masih bisa discroll dan gak bikin overflow dipake ditambah produk
+Kalau litview atau column digunakan buat menata elemen-elemen dalam formulir secara vertikal
+
+NOMOR 4
+ Bagaimana kamu menyesuaikan warna tema agar aplikasi Football Shop memiliki identitas visual yang konsisten dengan brand toko?
+ membuat semacam class yang mengidentifikasikan kira kira warna, design, dll apa saja yang mainly akan dipakai dan tinggal dipanggil di fungsi2 bawahnya supaya sesuai semua tanpa harus build design ulang
