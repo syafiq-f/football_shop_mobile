@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:football_shop/screens/menu.dart'; 
-import 'package:football_shop/screens/newslist_form.dart'; 
+import 'package:football_shop/screens/menu.dart';
+import 'package:football_shop/screens/productlist_form.dart';
+import 'package:football_shop/screens/product_entry_list.dart'; 
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -17,7 +18,7 @@ class LeftDrawer extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Football News',
+                  'Football Shop',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -27,7 +28,7 @@ class LeftDrawer extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.all(10)),
                 Text(
-                  "Seluruh berita sepak bola terkini di sini!",
+                  "Belanja perlengkapan bola di sini!",
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.white,
@@ -37,28 +38,43 @@ class LeftDrawer extends StatelessWidget {
               ],
             ),
           ),
-          // Navigasi ke Home
+          // Home
           ListTile(
             leading: const Icon(Icons.home_outlined),
             title: const Text('Home'),
             onTap: () {
               Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyHomePage(),
-                  ));
+                context,
+                MaterialPageRoute(builder: (context) => MyHomePage()),
+              );
             },
           ),
-          // Navigasi ke Add Product
+
+          // Add Product (form)
           ListTile(
             leading: const Icon(Icons.add),
             title: const Text('Add Product'),
             onTap: () {
               Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const NewsFormPage(),
-                  ));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProductFormPage(),
+                ),
+              );
+            },
+          ),
+
+          // Product List (JSON dari Django)
+          ListTile(
+            leading: const Icon(Icons.list_alt),
+            title: const Text('Product List'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProductEntryListPage(),
+                ),
+              );
             },
           ),
         ],

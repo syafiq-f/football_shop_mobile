@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:football_shop/screens/newslist_form.dart'; // Import halaman form tambah produk
+import 'package:football_shop/screens/productlist_form.dart'; // Import halaman form tambah produk
 import 'package:football_shop/widget/left_drawer.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -100,7 +100,7 @@ class ItemCard extends StatelessWidget {
             // Navigasi ke halaman form tambah produk
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const NewsFormPage()),
+              MaterialPageRoute(builder: (context) => const ProductFormPage()),
             );
           }
         },
